@@ -24,12 +24,19 @@
         "default_title": "browser action demo",
         "default_popup": "src/browser_action/browser_action.html"
     },
+    "web_accessible_resources": [
+        "js/jquery/jquery.min.js",
+        "src/inject/hhController.js",
+        "js/tracking.js",
+        "js/main.js"
+    ],
     "content_scripts": [{
         "matches": [
-            "https://*.com/*"
+            "https://*/*"
         ],
         "js": [
-            "src/inject/inject.js"
+            "js/jquery/jquery.js",
+            "src/inject/injector.js"
         ]
     }],
     "options_ui": {

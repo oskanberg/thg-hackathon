@@ -1,0 +1,6 @@
+#helpingand-video, #helpingand-canvas {
+    margin-left: 100px;
+    margin-top: 35px;
+    position: absolute;
+    z-index: 999;
+}

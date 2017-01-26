@@ -1,15 +1,6 @@
-function inject() {
-    chrome.tabs.executeScript(null, {
-        file: "js/jquery/jquery.min.js"
-    }, function () {
-        chrome.tabs.executeScript(null, {
-            file: "js/tracking.js"
-        }, function () {
-            chrome.tabs.executeScript({
-                file: 'js/main.js'
-            });
-        });
-    });
-}
-
-document.getElementById('clickme').addEventListener('click', inject);
+chrome.tabs.insertCSS({
+    file: 'css/main_injected.css'
+});
+chrome.tabs.executeScript({
+    code: 'var el = document.createElement("span");el.id="hhGo";document.body.appendChild(el);'
+});
