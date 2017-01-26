@@ -10,27 +10,34 @@ let keyUp = (keyCode) => {
     window.document.dispatchEvent(event);
 };
 
-window.hhController = {
-    up: () => {
-        keyDown(38);
-        keyUp(38);
-    },
-    left: () => {
-        keyDown(65);
-        setTimeout(() => {
-            keyUp(65)
-        }, 100);
-    },
-    right: () => {
-        keyDown(68);
-        setTimeout(() => {
-            keyUp(68)
-        }, 100);
-    },
-    space: () => {
-        keyDown(32);
-        setTimeout(() => {
-            keyUp(68)
-        }, 100);
+const keys = {
+    'a': 65,
+    'd': 68,
+    'LEFT': 37,
+    'RIGHT': 39,
+    'SPACE': 32
+};
+
+class hhController {
+
+    constructor() {
+        this.currentKey = null;
+    }
+
+    pressKey(key) {
+        if (this.currentKey === key) return;
+        if (this.currentKey != null) this.stopPressing();
+        this.currentKey = key;
+        if (typeof key === 'string') key = keys[key];
+        keyDown(key);
+    }
+
+    stopPressing() {
+        let key = this.currentKey;
+        if (typeof key === 'string') key = keys[key];
+        this.currentKey = null;
+        keyUp(key);
     }
 }
+
+window.hhController = new hhController();
