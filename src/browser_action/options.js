@@ -13,7 +13,7 @@ function createZone(location, code) {
 }
 
 function addZone() {
-    var location = oli.getLocation();
+    var location = {x: 5, y: 6}; //oli.getLocation(); @TODO
     createdZones.push(createZone(location));
 }
 
@@ -22,33 +22,40 @@ function saveZones() {
     var message = document.getElementById('hh_message');
     var button = document.getElementById('hh_button');
 
-    message.value = "Saving...";
+    message.innerText = "Saving...";
     button.disabled = true;
 
     for (var i = 1; i++; i<=createdZones.length) {
         var stringifiedZone = JSON.stringify(createdZones[i]);
-        sessionStorage.setItem(JSON.stringify(i), stringifiedZone);
+
+        //sessionStorage.setItem(JSON.stringify(i), stringifiedZone); @TODO too large to store  - fix
+
         if (i == createdZones.length) {
+            var button = document.getElementById('hh_button');
             button.disabled = false;
-            button.value = "Configure zones";
-            message.value = "Zones saved!";
+            button.innerText = "Configure zones";
+            var message = document.getElementById('hh_message');
+            message.innerText = "Zones saved!";
 
         }
     }
 }
 
 function onButtonClick(){
+    console.log('clicked!');
 
     if (configuring == true) {
         if (createdZones.length == numberOfZones) {
-            // save zones
+            console.log('saving zones');
             saveZones();
             configuring = false;
         }
         else if (createdZones.length == numberOfZones-1) {
             // add last zone
             addZone();
-            button.value = "Confirm Changes";
+
+            var button = document.getElementById('hh_button');
+            button.innerText = "Confirm Changes";
             button.style.backgroundColour = "blue";
         }
 
@@ -64,8 +71,8 @@ function onButtonClick(){
 }
 
 function startConfiguring() {
-    document.getElementById('hh_message').value = "Place finger in position";
-    document.getElementById('hh_button').value = "Add zone";
+    document.getElementById("hh_message").innerText = "Place finger in position";
+    document.getElementById('hh_button').innerText = "Add zone";
     // reset canvas to empty
 };
 
@@ -87,8 +94,8 @@ function startConfiguring() {
 
 // document.addEventListener('DOMContentLoaded', restore_options);
 
-document.getElementById('hh_button').addEventListener('click', onButtonClick());
-
+document.getElementById("hh_button").addEventListener('click', onButtonClick);
+console.log('in options.js');
 
 //
 // var colours = new tracking.ColorTracker(['magenta']);
