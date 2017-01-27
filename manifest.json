@@ -26,9 +26,10 @@
     },
     "web_accessible_resources": [
         "js/jquery/jquery.min.js",
-        "src/inject/hhController.js",
+        "js/hhController.js",
         "js/tracking.js",
-        "js/main.js"
+        "js/main.js",
+        "js/node_modules/d3/build/d3.min.js"
     ],
     "content_scripts": [{
         "matches": [
