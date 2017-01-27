@@ -10,6 +10,8 @@ let currentControl = {
     y: 0
 };
 
+let hhSelectedIndex = 0;
+
 let calculateControl = (rect) => {
     let avgX = rect.x + (rect.width / 2);
     let avgY = rect.y + (rect.height / 2);
@@ -159,6 +161,11 @@ class VoronoiDisplay {
             this.drawCell(polygons[0]);
             this.context.fillStyle = "rgba(255,0,0,0.3)";
             this.context.fill();
+        } else {
+            this.context.beginPath();
+            this.drawCell(polygons[hhSelectedIndex]);
+            this.context.fillStyle = "rgba(255,0,0,0.3)";
+            this.context.fill();
         }
 
         this.context.beginPath();
@@ -263,6 +270,8 @@ window.runHH = function () {
 
             if (window.hhControl) {
                 let point = voronoiDisplay.getPointClosestToPoint(currentControl.x, currentControl.y);
+                hhSelectedIndex = point.index;
+                voronoiDisplay.redraw();
                 let key = window.hhPointControls[point.index];
                 window.hhController.pressKey(key);
             }
