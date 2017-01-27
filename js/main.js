@@ -1,8 +1,8 @@
 const config = {
-    VIDEO_WIDTH: 640,
-    VIDEO_HEIGHT: 480,
-    // VIDEO_WIDTH: 320,
-    // VIDEO_HEIGHT: 240,
+    // VIDEO_WIDTH: 640,
+    // VIDEO_HEIGHT: 480,
+    VIDEO_WIDTH: 320,
+    VIDEO_HEIGHT: 240,
 };
 
 let currentControl = {
@@ -32,6 +32,76 @@ window.hhPointControls = [
 ];
 
 window.hhControl = false;
+
+// Saves options to chrome.storage
+var configuring = false;
+var numberOfZones = 3;
+var createdZones = 0;
+
+function createZone(location, code) {
+    var zone = {
+        x: location.x,
+        y: location.y,
+        code: code || null
+    };
+    return zone;
+}
+
+function addZone() {
+    hhAddControlAtCurrentPoint();
+    createdZones += 1;
+}
+
+function saveZones() {
+    var message = document.getElementById('hh_message');
+    var button = document.getElementById('hh_button');
+
+    message.innerText = "Saving...";
+    button.disabled = true;
+
+    var button = document.getElementById('hh_button');
+    button.disabled = false;
+    button.innerText = "Configure zones";
+    var message = document.getElementById('hh_message');
+    message.innerText = "Zones saved!";
+
+    hhStartControl();
+}
+
+function onButtonClick() {
+    console.log('clicked!');
+
+    if (configuring == true) {
+        if (createdZones == numberOfZones) {
+            console.log('saving zones');
+            saveZones();
+            configuring = false;
+        } else if (createdZones == numberOfZones - 1) {
+            // add last zone
+            addZone();
+
+            var button = document.getElementById('hh_button');
+            button.innerText = "Confirm Changes";
+            button.style.backgroundColour = "blue";
+        } else {
+            addZone();
+        }
+    } else {
+        configuring = true;
+        startConfiguring();
+    }
+
+}
+
+function startConfiguring() {
+    document.getElementById("hh_message").innerText = "Place finger in position";
+    document.getElementById('hh_button').innerText = "Add zone";
+    // reset canvas to empty
+};
+
+
+//
+
 
 class VoronoiDisplay {
     constructor() {
@@ -154,6 +224,9 @@ window.runHH = function () {
     let configPanel = "<div id='hh_container'><div id='hh_top'><video id='helpingand-video' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "' preload autoplay loop muted></video><canvas id='helpingand-canvas' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "'></canvas><canvas id='helpingand-voronoi' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "'></canvas></div> <div id='hh_bottom'><div id='hh_message'></div> <button id='hh_button'>Configure Zones</button></div></div>";
 
     $($.parseHTML(configPanel)).appendTo('body');
+
+    document.getElementById("hh_button").addEventListener('click', onButtonClick);
+    console.log('in options.js');
 
     // let video = '<video id="helpingand-video" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '" preload autoplay loop muted></video>';
     // let canvas = '<canvas id="helpingand-canvas" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
