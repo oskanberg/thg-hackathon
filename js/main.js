@@ -233,7 +233,7 @@ window.runHH = function () {
     $($.parseHTML(configPanel)).appendTo('body');
 
     document.getElementById("hh_button").addEventListener('click', onButtonClick);
-    console.log('in options.js');
+    console.log('in config code');
 
     // let video = '<video id="helpingand-video" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '" preload autoplay loop muted></video>';
     // let canvas = '<canvas id="helpingand-canvas" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
