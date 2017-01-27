@@ -39,8 +39,4 @@
             "src/inject/injector.js"
         ]
     }]
-//    "options_ui": {
-//        "page": "src/options/options.html",
-//        "chrome_style": true
-//    }
 }

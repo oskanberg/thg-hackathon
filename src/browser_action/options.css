@@ -1,0 +1,44 @@
+#hh_container {
+    font-family: verdana;
+}
+
+#hh_container, #hh_top, #hh_bottom {
+    box-sizing: border-box;
+    width: 320px;
+}
+
+#hh_video {
+    background: gray;
+    position: fixed;
+}
+
+#hh_canvas {
+    background: pink;
+    opacity: 0.5;
+}
+
+
+
+#hh_bottom {
+    padding:10px;
+    height: auto;
+    font-size: large;
+    display: inline-block;
+    text-align: center;
+}
+
+#hh_message {
+    height: 40px;
+    width: 100%;
+    font-size: medium;
+}
+
+#hh_button {
+    width:150px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: lightgreen;
+    font-size: medium;
+    border-radius: 20px;
+}

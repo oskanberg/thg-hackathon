@@ -14,11 +14,29 @@
             font-size: 2em;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="options.css" media="screen" />
 </head>
 
-<body style="width: 300px">
-    Open <a href="http://stackoverflow.com" target="_blank">this page</a> and then
-    <button id="clickme">click me</button>
+<body>
+
+<!--CONFIG PANEL-->
+
+    <div id="hh_container">
+        <div id="hh_top">
+            <video id="hh_video" width="320" height="240" preload autoplay loop muted></video>
+            <canvas id="hh_canvas" width="320" height="240"></canvas>
+        </div>
+        <div id="hh_bottom">
+            <div id="hh_message">Message here</div>
+            <button id="hh_button">Configure Zones</button>
+        </div>
+    </div>
+
+<!--END OF CONFIG PANEL-->
+
+
+    <!--Open <a href="http://stackoverflow.com" target="_blank">this page</a> and then-->
+    <!--<button id="clickme">click me</button>-->
     <script type="text/javascript" src="popup.js"></script>
 </body>
 
