@@ -1,8 +1,8 @@
 const config = {
-    // VIDEO_WIDTH: 640,
-    // VIDEO_HEIGHT: 480,
-    VIDEO_WIDTH: 320,
-    VIDEO_HEIGHT: 240,
+    VIDEO_WIDTH: 640,
+    VIDEO_HEIGHT: 480,
+    // VIDEO_WIDTH: 320,
+    // VIDEO_HEIGHT: 240,
 };
 
 let currentControl = {
@@ -135,19 +135,18 @@ class VoronoiDisplay {
     }
 }
 
-function startVoronoi() {
+function hhStartVoronoi() {
     window.voronoiDisplay = new VoronoiDisplay();
     window.voronoiDisplay.redraw();
 }
 
-function startControl() {
+function hhStartControl() {
     window.hhControl = true;
     window.voronoiDisplay.removePointer();
 }
 
-function addControlAtCurrentPoint(control) {
+function hhAddControlAtCurrentPoint() {
     window.voronoiDisplay.addPointAtPointer()
-    window.hhPointControls.push(control);
 }
 
 window.runHH = function () {
@@ -209,7 +208,7 @@ let checkInterval = setInterval(() => {
     if (els) {
         console.log('Starting hh.');
         runHH();
-        startVoronoi();
+        hhStartVoronoi();
         clearInterval(checkInterval);
     } else {
         console.log('Searching for hhGo element.');
