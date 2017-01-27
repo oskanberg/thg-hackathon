@@ -20,70 +20,13 @@ let calculateControl = (rect) => {
     }
 };
 
-// var c, ctx;
-//
-// function startVoronoi() {
-//     //Initialize triangulation
-//     var sites = new Array(10);
-//     for (var i = 0; i < 10; ++i) {
-//         sites[i] = [Math.random(), Math.random()];
-//     }
-//     var vDiagram = window.voronoi(sites)
-//     var colors = new Array(vDiagram.cells.length);
-//     for (var i = 0; i < vDiagram.cells.length; ++i) {
-//         colors[i] = '#AAFF00';
-//     }
-//
-//     canvas = document.getElementById("helpingand-voronoi");
-//     context = canvas.getContext("2d");
-//
-//
-//     var w = canvas.width;
-//     var h = canvas.height;
-//     context.setTransform(
-//         w, 0,
-//         0, h,
-//         0, 0);
-//     context.fillStyle = "#fff";
-//     context.fillRect(0, 0, w, h);
-//
-//     var cells = vDiagram.cells;
-//     var points = vDiagram.positions;
-//
-//     context.strokeStyle = "#000";
-//     context.lineWidth = Math.min(1.0 / w, 1.0 / h);
-//     console.log('cell number:' + cells.length);
-//     for (var i = 0; i < cells.length; ++i) {
-//         console.log(cell);
-//         var cell = cells[i];
-//         if (cell.indexOf(-1) >= 0) {
-//             continue;
-//         }
-//         context.fillStyle = colors[i];
-//         context.beginPath();
-//         context.moveTo(points[cell[0]][0], points[cell[0]][1]);
-//         for (var j = 1; j < cell.length; ++j) {
-//             context.lineTo(points[cell[j]][0], points[cell[j]][1]);
-//         }
-//         context.closePath();
-//         context.stroke();
-//         context.fill();
-//     }
-//
-//     context.fillStyle = "#000";
-//     for (var i = 0; i < sites.length; ++i) {
-//         context.beginPath();
-//         context.arc(sites[i][0], sites[i][1], 5.0 / w, 0, 2 * Math.PI);
-//         context.closePath();
-//         context.fill();
-//     }
-// }
-
-
 window.hhPoints = [
-    [50, 10],
-    [100, 200]
+    [0, 0]
 ];
+
+window.hhPointControls = [];
+
+window.hhControl = false;
 
 class VoronoiDisplay {
     constructor() {
@@ -104,13 +47,24 @@ class VoronoiDisplay {
         this.redraw();
     }
 
+    getPointClosestToPoint(x, y) {
+        var sites = window.hhPoints;
+        var diagram = this.voronoi(sites);
+        return diagram.find(x, y);
+    }
+
+    removePointer() {
+        window.hhPoints.shift();
+        this.redraw();
+    }
+
     updatePointer(x, y) {
         window.hhPoints[0] = [x, y];
         this.redraw();
     }
 
     addPointAtPointer() {
-        window.hhPoints[0].push(window.hhPoints[0]);
+        window.hhPoints.push(window.hhPoints[0]);
     }
 
     redraw() {
@@ -119,11 +73,13 @@ class VoronoiDisplay {
             links = diagram.links(),
             polygons = diagram.polygons();
 
-        this.context.clearRect(0, 0, this.width, this.height);
-        this.context.beginPath();
-        this.drawCell(polygons[0]);
-        this.context.fillStyle = "#f00";
-        this.context.fill();
+        if (!window.hhControl) {
+            this.context.clearRect(0, 0, this.width, this.height);
+            this.context.beginPath();
+            this.drawCell(polygons[0]);
+            this.context.fillStyle = "rgba(255,0,0,0.3)";
+            this.context.fill();
+        }
 
         this.context.beginPath();
         for (var i = 0, n = polygons.length; i < n; ++i) this.drawCell(polygons[i]);
@@ -174,6 +130,16 @@ function startVoronoi() {
     window.voronoiDisplay.redraw();
 }
 
+function startControl() {
+    window.hhControl = true;
+    window.voronoiDisplay.removePointer();
+}
+
+function addControlAtCurrentPoint(control) {
+    window.voronoiDisplay.addPointAtPointer()
+    window.hhPointControls.push(control);
+}
+
 window.runHH = function () {
     let video = '<video id="helpingand-video" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '" preload autoplay loop muted></video>';
     let canvas = '<canvas id="helpingand-canvas" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
@@ -189,7 +155,7 @@ window.runHH = function () {
 
     tracking.ColorTracker.registerColor('green-finger', function (r, g, b) {
         // return roughly(r, 60) && roughly(g, 110) && roughly(b, 76);
-        if (r < 100 && g > 100 && b < 100) return true;
+        if (r < 70 && g > 50 && b < 100) return true;
 
         return false;
     });
@@ -206,7 +172,9 @@ window.runHH = function () {
 
             currentControl = calculateControl(rect);
 
-            if (window.voronoiDisplay) voronoiDisplay.updatePointer(currentControl.x, currentControl.y);
+            if (window.voronoiDisplay && !window.hhControl) voronoiDisplay.updatePointer(currentControl.x, currentControl.y);
+
+            console.log(voronoiDisplay.getPointClosestToPoint(currentControl.x, currentControl.y));
 
             if (currentControl.x < config.VIDEO_WIDTH / 3) {
                 console.log('left');
@@ -238,6 +206,7 @@ let checkInterval = setInterval(() => {
     if (els) {
         console.log('Starting hh.');
         runHH();
+        startVoronoi();
         clearInterval(checkInterval);
     } else {
         console.log('Searching for hhGo element.');
