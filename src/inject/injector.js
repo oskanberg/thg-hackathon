@@ -49,6 +49,14 @@ s4.onload = function () {
 };
 (document.head || document.documentElement).appendChild(s4);
 
+var s5 = document.createElement('script');
+s5.src = chrome.extension.getURL('js/options.js');
+s5.onload = function () {
+    console.log(s5);
+    this.remove();
+};
+(document.head || document.documentElement).appendChild(s5);
+
 
 var m = document.createElement('script');
 m.src = chrome.extension.getURL('js/main.js');

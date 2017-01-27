@@ -175,13 +175,18 @@ function startVoronoi() {
 }
 
 window.runHH = function () {
-    let video = '<video id="helpingand-video" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '" preload autoplay loop muted></video>';
-    let canvas = '<canvas id="helpingand-canvas" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
-    let voronoiCanvas = '<canvas id="helpingand-voronoi" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
 
-    $($.parseHTML(video)).appendTo('body');
-    $($.parseHTML(canvas)).appendTo('body');
-    $($.parseHTML(voronoiCanvas)).appendTo('body');
+    let configPanel = "<div id='hh_container'><div id='hh_top'><video id='helpingand-video' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "' preload autoplay loop muted></video><canvas id='helpingand-canvas' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "'></canvas><canvas id='helpingand-voronoi' width='" + config.VIDEO_WIDTH + "' height='" + config.VIDEO_HEIGHT + "'></canvas></div> <div id='hh_bottom'><div id='hh_message'></div> <button id='hh_button'>Configure Zones</button></div></div>";
+
+    $($.parseHTML(configPanel)).appendTo('body');
+
+    // let video = '<video id="helpingand-video" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '" preload autoplay loop muted></video>';
+    // let canvas = '<canvas id="helpingand-canvas" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
+    // let voronoiCanvas = '<canvas id="helpingand-voronoi" width="' + config.VIDEO_WIDTH + '" height="' + config.VIDEO_HEIGHT + '"></canvas>';
+    //
+    // $($.parseHTML(video)).appendTo('body');
+    // $($.parseHTML(canvas)).appendTo('body');
+    // $($.parseHTML(voronoiCanvas)).appendTo('body');
 
     var videoElement = document.getElementById('helpingand-video');
     var canvasElement = document.getElementById('helpingand-canvas');

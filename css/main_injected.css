@@ -1,6 +1,61 @@
-#helpingand-video, #helpingand-canvas, #helpingand-voronoi {
-    margin-right: 10px;
-    margin-top: 35px;
-    position: absolute;
-    z-index: 99999999;
+ #hh_container {
+     margin-right: 10px;
+     margin-top: 10px;
+     margin-left: 10px;
+     box-sizing: border-box;
+     width: 350px;
+     height: auto;
+ }
+
+ #helpingand-video, #helpingand-canvas, #helpingand-voronoi, #hh_container {
+     position: absolute;
+     z-index: 99999999;
+ }
+
+#hh_container {
+    font-family: verdana;
+}
+
+#hh_bottom {
+    box-sizing: border-box;
+    width:100%;
+    height: 100%;
+}
+
+#helpingand-video {
+    background: gray;
+    position: fixed;
+}
+
+#helpingand-canvas {
+    background: pink;
+    opacity: 0.5;
+}
+
+/*#helpingand-voronoi {*/
+
+/*}*/
+
+#hh_bottom {
+    padding:10px;
+    height: auto;
+    font-size: large;
+    display: inline-block;
+    text-align: center;
+}
+
+#hh_message {
+    height: 40px;
+    width: 100%;
+    font-size: medium;
+}
+
+#hh_button {
+    width:150px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: lightgreen;
+    font-size: medium;
+    border-radius: 20px;
 }
