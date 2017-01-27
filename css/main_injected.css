@@ -33,7 +33,8 @@
  }
 
 #helpingand-video {
-    position: fixed;
+    display: block !important;
+    /*position: absolute;*/
 }
 
 #helpingand-canvas, #helpingand-voronoi {
