@@ -15,7 +15,8 @@ const keys = {
     'd': 68,
     'LEFT': 37,
     'RIGHT': 39,
-    'SPACE': 32
+    'SPACE': 32,
+    'NEUTRAL': null
 };
 
 class hhController {
