@@ -37,7 +37,7 @@ window.hhControl = false;
 
 // Saves options to chrome.storage
 var configuring = false;
-var numberOfZones = 3;
+var numberOfZones = 4;
 var createdZones = 0;
 
 function createZone(location, code) {
@@ -59,7 +59,7 @@ function saveZones() {
     var button = document.getElementById('hh_button');
 
     message.innerText = "Saving...";
-    button.disabled = true;
+    button.style.display = 'none'
 
     var button = document.getElementById('hh_button');
     button.disabled = false;

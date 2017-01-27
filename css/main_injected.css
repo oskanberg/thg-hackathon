@@ -13,16 +13,18 @@
      width: 320px;
      height: 240px;
      box-sizing: border-box;
-
  }
 
+ 
  #hh_bottom {
+     box-sizing: border-box;
+     opacity:0.8;
+     background: white;
      width: 100%;
      height: auto;
      font-size: large;
      display: inline-block;
      text-align: center;
-     padding:10px;
  }
 
  #helpingand-video, #helpingand-canvas, #helpingand-voronoi, #hh_container {
@@ -35,15 +37,14 @@
 }
 
 #helpingand-canvas, #helpingand-voronoi {
-    opacity: 0.5;
+    opacity: 0.7;
 }
-
-
 
 #hh_message {
     height: 40px;
     width: 100%;
     font-size: medium;
+    padding-top:20px;
 }
 
 #hh_button {
