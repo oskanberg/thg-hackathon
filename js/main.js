@@ -24,7 +24,10 @@ window.hhPoints = [
     [0, 0]
 ];
 
-window.hhPointControls = [];
+window.hhPointControls = [
+    'LEFT',
+    'RIGHT'
+];
 
 window.hhControl = false;
 
@@ -54,17 +57,21 @@ class VoronoiDisplay {
     }
 
     removePointer() {
+
         window.hhPoints.shift();
         this.redraw();
     }
 
     updatePointer(x, y) {
-        window.hhPoints[0] = [x, y];
+        if (!window.control) {
+            window.hhPoints[0] = [x, y];
+        }
         this.redraw();
     }
 
     addPointAtPointer() {
         window.hhPoints.push(window.hhPoints[0]);
+        this.redraw();
     }
 
     redraw() {
@@ -73,8 +80,9 @@ class VoronoiDisplay {
             links = diagram.links(),
             polygons = diagram.polygons();
 
+        this.context.clearRect(0, 0, this.width, this.height);
+        
         if (!window.hhControl) {
-            this.context.clearRect(0, 0, this.width, this.height);
             this.context.beginPath();
             this.drawCell(polygons[0]);
             this.context.fillStyle = "rgba(255,0,0,0.3)";
@@ -174,17 +182,10 @@ window.runHH = function () {
 
             if (window.voronoiDisplay && !window.hhControl) voronoiDisplay.updatePointer(currentControl.x, currentControl.y);
 
-            console.log(voronoiDisplay.getPointClosestToPoint(currentControl.x, currentControl.y));
-
-            if (currentControl.x < config.VIDEO_WIDTH / 3) {
-                console.log('left');
-                window.hhController.pressKey('LEFT');
-            } else if (currentControl.x > (config.VIDEO_WIDTH / 3) * 2) {
-                window.hhController.pressKey('RIGHT');
-                console.log('right');
-            } else {
-                window.hhController.stopPressing();
-                console.log('neuter');
+            if (window.hhControl) {
+                let point = voronoiDisplay.getPointClosestToPoint(currentControl.x, currentControl.y);
+                let key = window.hhPointControls[point.index];
+                window.hhController.pressKey(key);
             }
 
             context.strokeStyle = rect.color;
