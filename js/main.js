@@ -1,14 +1,16 @@
 const config = {
-    VIDEO_WIDTH: 640,
-    VIDEO_HEIGHT: 480,
-    // VIDEO_WIDTH: 320,
-    // VIDEO_HEIGHT: 240,
+    // VIDEO_WIDTH: 640,
+    // VIDEO_HEIGHT: 480,
+    VIDEO_WIDTH: 320,
+    VIDEO_HEIGHT: 240,
 };
 
 let currentControl = {
     x: 0,
     y: 0
 };
+
+let hhSelectedIndex = 0;
 
 let calculateControl = (rect) => {
     let avgX = rect.x + (rect.width / 2);
@@ -87,6 +89,11 @@ class VoronoiDisplay {
         if (!window.hhControl) {
             this.context.beginPath();
             this.drawCell(polygons[0]);
+            this.context.fillStyle = "rgba(255,0,0,0.3)";
+            this.context.fill();
+        } else {
+            this.context.beginPath();
+            this.drawCell(polygons[hhSelectedIndex]);
             this.context.fillStyle = "rgba(255,0,0,0.3)";
             this.context.fill();
         }
@@ -190,6 +197,8 @@ window.runHH = function () {
 
             if (window.hhControl) {
                 let point = voronoiDisplay.getPointClosestToPoint(currentControl.x, currentControl.y);
+                hhSelectedIndex = point.index;
+                voronoiDisplay.redraw();
                 let key = window.hhPointControls[point.index];
                 window.hhController.pressKey(key);
             }
