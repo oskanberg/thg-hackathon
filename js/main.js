@@ -25,8 +25,10 @@ window.hhPoints = [
 ];
 
 window.hhPointControls = [
+    'NEUTRAL',
     'LEFT',
-    'RIGHT'
+    'RIGHT',
+    'SPACE'
 ];
 
 window.hhControl = false;
@@ -81,7 +83,7 @@ class VoronoiDisplay {
             polygons = diagram.polygons();
 
         this.context.clearRect(0, 0, this.width, this.height);
-        
+
         if (!window.hhControl) {
             this.context.beginPath();
             this.drawCell(polygons[0]);
