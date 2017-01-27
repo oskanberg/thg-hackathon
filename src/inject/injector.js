@@ -51,3 +51,11 @@
         this.remove();
     };
     (document.head || document.documentElement).appendChild(m);
+
+    var s = document.createElement('script');
+    s.src = chrome.extension.getURL('js/options.js');
+    s.onload = function () {
+        console.log(s);
+        this.remove();
+    };
+    (document.head || document.documentElement).appendChild(s);

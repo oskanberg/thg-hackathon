@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helping Hand</title>
+    <link rel="stylesheet" type="text/css" href="css/options.css" media="screen" />
+    <script src="tracking.js"></script>
+</head>
+<body>
+
+
+<div id="hh_top">
+    <video id="hh_video" width="320" height="240" preload autoplay loop muted></video>
+    <canvas id="hh_canvas" width="320" height="240"></canvas>
+</div>
+<div id="hh_bottom">
+    <div id="hh_message"></div>
+    <button id="hh_button">Configure Zones</button>
+</div>
+
+
+
+<!--<div id="top-section">-->
+    <!--<list>-->
+        <!--<div id="step-one" class="step">-->
+            <!--<div id="one">1</div>-->
+            <!--<div id="text-one">Attach finger cap and place hand as shown</div>-->
+
+        <!--</div>-->
+        <!--<div id=step-two" class="step">-->
+            <!--<div id="two">2</div>-->
+            <!--<div id="text-two">Align the cap...</div>-->
+        <!--</div>-->
+    <!--</list>-->
+    <!--<div id="video-container">-->
+        <!--<video id="video" width="320" height="240" preload autoplay loop muted>-->
+
+        <!--</video>-->
+
+    <!--</div>-->
+<!--</div>-->
+
+
+<div id="saved-colour" class="colour"></div>
+<div id="live-colour" class="colour"></div>
+
+<select id="color">
+    <option value="red">red</option>
+    <option value="green">green</option>
+    <option value="blue">blue</option>
+    <option value="yellow">yellow</option>
+</select>
+
+<label>
+    <input type="checkbox" id="like">
+    I like colors.
+</label>
+
+<div id="status"></div>
+<button id="save">Save</button>
+
+<script src="js/options.js"></script>
+</body>
+</html>
